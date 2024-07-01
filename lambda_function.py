@@ -15,20 +15,27 @@ def lambda_handler(event, context):
             }
 
         resume_data = response['Item']
-
-        def convert_ddb_item(item):
-            if isinstance(item, dict):
-                if 'S' in item:
-                    return item['S']
-                elif 'N' in item:
-                    return item['N']
-                elif 'M' in item:
-                    return {k: convert_ddb_item(v) for k, v in item['M'].items()}
-                elif 'L' in item:
-                    return [convert_ddb_item(v) for v in item['L']]
-            return item
-
-        formatted_data = convert_ddb_item(resume_data)
+        
+        # Format the output in the desired order
+        formatted_data = {
+            "id": resume_data["id"],
+            "basics": {
+                "name": resume_data["basics"]["name"],
+                "label": resume_data["basics"]["label"],
+                "email": resume_data["basics"]["email"],
+                "phone": resume_data["basics"]["phone"],
+                "summary": resume_data["basics"]["summary"],
+                "url": resume_data["basics"]["url"],
+                "location": {
+                    "city": resume_data["basics"]["location"]["city"],
+                    "region": resume_data["basics"]["location"]["region"]
+                },
+                "profiles": resume_data["basics"]["profiles"]
+            },
+            "skills": resume_data["skills"],
+            "projects": resume_data["projects"],
+            "certificates": resume_data["certificates"]
+        }
 
         return {
             'statusCode': 200,
