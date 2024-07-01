@@ -16,23 +16,9 @@ def lambda_handler(event, context):
 
         resume_data = response['Item']
 
-        def convert_ddb_item(item):
-            if isinstance(item, dict):
-                if 'S' in item:
-                    return item['S']
-                elif 'N' in item:
-                    return item['N']
-                elif 'M' in item:
-                    return {k: convert_ddb_item(v) for k, v in item['M'].items()}
-                elif 'L' in item:
-                    return [convert_ddb_item(v) for v in item['L']]
-            return item
-
-        formatted_data = convert_ddb_item(resume_data)
-
         return {
             'statusCode': 200,
-            'body': json.dumps(formatted_data, indent=4)
+            'body': json.dumps(resume_data, indent=4)
         }
     except Exception as e:
         print(e)
