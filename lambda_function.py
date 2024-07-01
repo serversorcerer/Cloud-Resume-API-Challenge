@@ -1,30 +1,30 @@
-import json
-import boto3
-from collections import OrderedDict
+const AWS = require('aws-sdk');
 
-dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('ResumeData')
+// Initialize AWS DynamoDB client
+const dynamodb = new AWS.DynamoDB();
 
-def lambda_handler(event, context):
-    try:
-        response = table.get_item(Key={'id': '1'})
-        resume_data = response.get('Item', {})
-        
-        ordered_resume_data = OrderedDict([
-            ("id", resume_data.get("id")),
-            ("basics", resume_data.get("basics")),
-            ("certificates", resume_data.get("certificates")),
-            ("projects", resume_data.get("projects")),
-            ("skills", resume_data.get("skills")),
-        ])
-        
-        return {
-            'statusCode': 200,
-            'body': json.dumps(ordered_resume_data, indent=4)
+exports.handler = async (event) => {
+    // Extract data from event
+    const { id, basics, certificates, projects, skills } = event;
+
+    // DynamoDB params for putting an item
+    const params = {
+        TableName: 'YourTableName', // Replace with your DynamoDB table name
+        Item: {
+            'id': { S: id },
+            'basics': { M: basics },
+            'certificates': { L: certificates },
+            'projects': { L: projects },
+            'skills': { L: skills }
         }
-    except Exception as e:
-        print(e)
-        return {
-            'statusCode': 500,
-            'body': json.dumps({'error': str(e)}, indent=4)
-        }
+    };
+
+    try {
+        // Put item into DynamoDB
+        await dynamodb.putItem(params).promise();
+        return { statusCode: 200, body: 'Item added successfully' };
+    } catch (err) {
+        console.error('Error putting item into DynamoDB:', err);
+        return { statusCode: 500, body: 'Error putting item into DynamoDB' };
+    }
+};
