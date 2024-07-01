@@ -10,9 +10,22 @@ def lambda_handler(event, context):
         response = table.get_item(Key={'id': '1'})
         resume_data = response.get('Item', {})
 
+        # Reorder the JSON data to match your desired format
         ordered_resume_data = OrderedDict([
             ("id", resume_data.get("id")),
-            ("basics", resume_data.get("basics")),
+            ("basics", OrderedDict([
+                ("name", resume_data["basics"]["M"]["name"]),
+                ("label", resume_data["basics"]["M"]["label"]),
+                ("email", resume_data["basics"]["M"]["email"]),
+                ("phone", resume_data["basics"]["M"]["phone"]),
+                ("url", resume_data["basics"]["M"]["url"]),
+                ("summary", resume_data["basics"]["M"]["summary"]),
+                ("location", OrderedDict([
+                    ("city", resume_data["basics"]["M"]["location"]["M"]["city"]),
+                    ("region", resume_data["basics"]["M"]["location"]["M"]["region"]),
+                ])),
+                ("profiles", resume_data["basics"]["M"]["profiles"]),
+            ])),
             ("certificates", resume_data.get("certificates")),
             ("projects", resume_data.get("projects")),
             ("skills", resume_data.get("skills")),
