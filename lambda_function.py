@@ -1,67 +1,30 @@
 import json
 import boto3
-from boto3.dynamodb.conditions import Key
+from collections import OrderedDict
 
 dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('YourDynamoDBTableName')
+table = dynamodb.Table('ResumeData')
 
 def lambda_handler(event, context):
-    response = table.get_item(
-        Key={
-            'id': '1'
-        }
-    )
-    
-    if 'Item' in response:
-        item = response['Item']
-        result = {
-            "id": item["id"]["S"],
-            "basics": {
-                "name": item["basics"]["M"]["name"]["S"],
-                "label": item["basics"]["M"]["label"]["S"],
-                "email": item["basics"]["M"]["email"]["S"],
-                "phone": item["basics"]["M"]["phone"]["S"],
-                "url": item["basics"]["M"]["url"]["S"],
-                "summary": item["basics"]["M"]["summary"]["S"],
-                "location": {
-                    "city": item["basics"]["M"]["location"]["M"]["city"]["S"],
-                    "region": item["basics"]["M"]["location"]["M"]["region"]["S"]
-                },
-                "profiles": [
-                    {
-                        "network": profile["M"]["network"]["S"],
-                        "username": profile["M"]["username"]["S"],
-                        "url": profile["M"]["url"]["S"]
-                    } for profile in item["basics"]["M"]["profiles"]["L"]
-                ]
-            },
-            "certificates": [
-                {
-                    "name": certificate["M"]["name"]["S"],
-                    "issuer": certificate["M"]["issuer"]["S"],
-                    "date": certificate["M"]["date"]["S"]
-                } for certificate in item["certificates"]["L"]
-            ],
-            "projects": [
-                {
-                    "name": project["M"]["name"]["S"],
-                    "startDate": project["M"]["startDate"]["S"],
-                    "endDate": project["M"]["endDate"]["S"],
-                    "description": project["M"]["description"]["S"],
-                    "highlights": [
-                        highlight["S"] for highlight in project["M"]["highlights"]["L"]
-                    ],
-                    "url": project["M"].get("url", {}).get("S", "")
-                } for project in item["projects"]["L"]
-            ],
-            "skills": [skill["S"] for skill in item["skills"]["L"]]
-        }
+    try:
+        response = table.get_item(Key={'id': '1'})
+        resume_data = response.get('Item', {})
+
+        ordered_resume_data = OrderedDict([
+            ("id", resume_data.get("id")),
+            ("basics", resume_data.get("basics")),
+            ("certificates", resume_data.get("certificates")),
+            ("projects", resume_data.get("projects")),
+            ("skills", resume_data.get("skills")),
+        ])
+
         return {
             'statusCode': 200,
-            'body': json.dumps(result)
+            'body': json.dumps(ordered_resume_data, indent=4)
         }
-    else:
+    except Exception as e:
+        print(e)
         return {
-            'statusCode': 404,
-            'body': json.dumps({'error': 'Item not found'})
+            'statusCode': 500,
+            'body': json.dumps({'error': str(e)}, indent=4)
         }
