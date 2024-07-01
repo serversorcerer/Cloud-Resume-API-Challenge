@@ -1,81 +1,207 @@
 {
-    "id": "1",
+    "id": {
+      "S": "1"
+    },
     "basics": {
-      "name": "Joseph A. Leto",
-      "label": "Cloud Engineer",
-      "email": "joe@josephaleto.io",
-      "phone": "304-886-8223",
-      "summary": "Aspiring Solutions Architect with a passion for cloud technologies and a focus on AWS services. Committed to mastering cloud infrastructure and deployment strategies.",
-      "url": "https://josephaleto.io",
-      "location": {
-        "city": "Ashburn",
-        "region": "Virginia"
-      },
-      "profiles": [
+      "M": {
+        "name": {
+          "S": "Joseph A. Leto"
+        },
+        "label": {
+          "S": "Cloud Engineer"
+        },
+        "email": {
+          "S": "joe@josephaleto.io"
+        },
+        "phone": {
+          "S": "304-886-8223"
+        },
+        "summary": {
+          "S": "Aspiring Solutions Architect with a passion for cloud technologies and a focus on AWS services. Committed to mastering cloud infrastructure and deployment strategies."
+        },
+        "url": {
+          "S": "https://josephaleto.io"
+        },
+        "location": {
+          "M": {
+            "city": {
+              "S": "Ashburn"
+            },
+            "region": {
+              "S": "Virginia"
+            }
+          }
+        },
+        "profiles": {
+          "L": [
+            {
+              "M": {
+                "network": {
+                  "S": "Website"
+                },
+                "url": {
+                  "S": "https://josephaleto.io"
+                },
+                "username": {
+                  "S": "josephaleto.io"
+                }
+              }
+            },
+            {
+              "M": {
+                "network": {
+                  "S": "LinkedIn"
+                },
+                "url": {
+                  "S": "https://linkedin.com/in/joseph-leto"
+                },
+                "username": {
+                  "S": "joseph-leto"
+                }
+              }
+            },
+            {
+              "M": {
+                "network": {
+                  "S": "GitHub"
+                },
+                "url": {
+                  "S": "https://github.com/serversorcerer"
+                },
+                "username": {
+                  "S": "serversorcerer"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "skills": {
+      "L": [
         {
-          "network": "Website",
-          "url": "https://josephaleto.io",
-          "username": "josephaleto.io"
+          "S": "AWS"
         },
         {
-          "network": "LinkedIn",
-          "url": "https://linkedin.com/in/joseph-leto",
-          "username": "joseph-leto"
+          "S": "CI/CD"
         },
         {
-          "network": "GitHub",
-          "url": "https://github.com/serversorcerer",
-          "username": "serversorcerer"
+          "S": "Terraform"
+        },
+        {
+          "S": "Python"
+        },
+        {
+          "S": "DevOps Automation"
+        },
+        {
+          "S": "Lambda"
+        },
+        {
+          "S": "API Gateway"
+        },
+        {
+          "S": "CloudFormation"
+        },
+        {
+          "S": "DynamoDB"
         }
       ]
     },
-    "skills": [
-      "AWS",
-      "CI/CD",
-      "Terraform",
-      "Python",
-      "DevOps Automation",
-      "Lambda",
-      "API Gateway",
-      "CloudFormation",
-      "DynamoDB"
-    ],
-    "projects": [
-      {
-        "name": "Serverless API for Resume Data",
-        "description": "Developed a serverless API using AWS Lambda and API Gateway to fetch resume data stored in DynamoDB.",
-        "highlights": [
-          "Implemented robust security measures using IAM roles and policies.",
-          "Automated deployment with GitHub Actions, ensuring continuous integration and delivery.",
-          "Designed API endpoints for efficient data retrieval and presentation."
-        ],
-        "startDate": "2024-06-01",
-        "endDate": "Present"
-      },
-      {
-        "name": "Cloud Resume Challenge",
-        "description": "Architected a serverless web application using AWS and Terraform.",
-        "highlights": [
-          "Initiated an AWS S3-hosted website with CloudFront, elevating user engagement by 40%.",
-          "Integrated a Python-scripted AWS Lambda visitor counter, enriching user interaction and website dynamism.",
-          "Deployed CI/CD pipelines via GitHub Actions, accelerating update efficiency and cutting deployment time by 60%.",
-          "Managed infrastructure with Terraform, halving setup time and solidifying deployment consistency."
-        ],
-        "startDate": "2023-11-01",
-        "endDate": "Present"
-      }
-    ],
-    "certificates": [
-      {
-        "name": "AWS Certified Cloud Practitioner",
-        "date": "2023",
-        "issuer": "Amazon Web Services"
-      },
-      {
-        "name": "AWS Certified Solutions Architect – Associate",
-        "date": "In Progress",
-        "issuer": "Amazon Web Services"
-      }
-    ]
+    "projects": {
+      "L": [
+        {
+          "M": {
+            "name": {
+              "S": "Serverless API for Resume Data"
+            },
+            "description": {
+              "S": "Developed a serverless API using AWS Lambda and API Gateway to fetch resume data stored in DynamoDB."
+            },
+            "highlights": {
+              "L": [
+                {
+                  "S": "Implemented robust security measures using IAM roles and policies."
+                },
+                {
+                  "S": "Automated deployment with GitHub Actions, ensuring continuous integration and delivery."
+                },
+                {
+                  "S": "Designed API endpoints for efficient data retrieval and presentation."
+                }
+              ]
+            },
+            "startDate": {
+              "S": "2024-06-01"
+            },
+            "endDate": {
+              "S": "Present"
+            }
+          }
+        },
+        {
+          "M": {
+            "name": {
+              "S": "Cloud Resume Challenge"
+            },
+            "description": {
+              "S": "Architected a serverless web application using AWS and Terraform."
+            },
+            "highlights": {
+              "L": [
+                {
+                  "S": "Initiated an AWS S3-hosted website with CloudFront, elevating user engagement by 40%."
+                },
+                {
+                  "S": "Integrated a Python-scripted AWS Lambda visitor counter, enriching user interaction and website dynamism."
+                },
+                {
+                  "S": "Deployed CI/CD pipelines via GitHub Actions, accelerating update efficiency and cutting deployment time by 60%."
+                },
+                {
+                  "S": "Managed infrastructure with Terraform, halving setup time and solidifying deployment consistency."
+                }
+              ]
+            },
+            "startDate": {
+              "S": "2023-11-01"
+            },
+            "endDate": {
+              "S": "Present"
+            }
+          }
+        }
+      ]
+    },
+    "certificates": {
+      "L": [
+        {
+          "M": {
+            "name": {
+              "S": "AWS Certified Cloud Practitioner"
+            },
+            "date": {
+              "S": "2023"
+            },
+            "issuer": {
+              "S": "Amazon Web Services"
+            }
+          }
+        },
+        {
+          "M": {
+            "name": {
+              "S": "AWS Certified Solutions Architect – Associate"
+            },
+            "date": {
+              "S": "In Progress"
+            },
+            "issuer": {
+              "S": "Amazon Web Services"
+            }
+          }
+        }
+      ]
+    }
   }
   
