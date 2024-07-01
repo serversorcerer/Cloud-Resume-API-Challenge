@@ -6,9 +6,8 @@ table = dynamodb.Table('ResumeData')
 
 def lambda_handler(event, context):
     try:
-        response = table.get_item(
-            Key={'id': '1'}
-        )
+        response = table.get_item(Key={'id': '1'})
+        
         if 'Item' not in response:
             return {
                 'statusCode': 404,
@@ -16,7 +15,7 @@ def lambda_handler(event, context):
             }
 
         resume_data = response['Item']
-        
+
         def convert_ddb_item(item):
             if isinstance(item, dict):
                 if 'S' in item:
