@@ -2,6 +2,7 @@ import json
 import boto3
 from collections import OrderedDict
 
+# Initialize the DynamoDB Document Client
 dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table('ResumeData')
 
