@@ -14,6 +14,10 @@ def lambda_handler(event, context):
         )
         resume_data = response.get('Item', {})
         
+        # Debugging print statements to understand data structure
+        print("DynamoDB Response:", json.dumps(response, indent=4))
+        print("Resume Data:", json.dumps(resume_data, indent=4))
+        
         # Reformatting the response
         formatted_data = {
             "id": resume_data["id"]["S"],
