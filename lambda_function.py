@@ -1,42 +1,67 @@
 import json
 import boto3
-from botocore.exceptions import ClientError
+from boto3.dynamodb.conditions import Key
 
 dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('ResumeData')
+table = dynamodb.Table('YourDynamoDBTableName')
 
 def lambda_handler(event, context):
-    try:
-        response = table.get_item(
-            Key={
-                'id': '1'
-            }
-        )
-        resume_data = response.get('Item', {})
-        formatted_data = convert_dynamodb_to_json(resume_data)
+    response = table.get_item(
+        Key={
+            'id': '1'
+        }
+    )
+    
+    if 'Item' in response:
+        item = response['Item']
+        result = {
+            "id": item["id"]["S"],
+            "basics": {
+                "name": item["basics"]["M"]["name"]["S"],
+                "label": item["basics"]["M"]["label"]["S"],
+                "email": item["basics"]["M"]["email"]["S"],
+                "phone": item["basics"]["M"]["phone"]["S"],
+                "url": item["basics"]["M"]["url"]["S"],
+                "summary": item["basics"]["M"]["summary"]["S"],
+                "location": {
+                    "city": item["basics"]["M"]["location"]["M"]["city"]["S"],
+                    "region": item["basics"]["M"]["location"]["M"]["region"]["S"]
+                },
+                "profiles": [
+                    {
+                        "network": profile["M"]["network"]["S"],
+                        "username": profile["M"]["username"]["S"],
+                        "url": profile["M"]["url"]["S"]
+                    } for profile in item["basics"]["M"]["profiles"]["L"]
+                ]
+            },
+            "certificates": [
+                {
+                    "name": certificate["M"]["name"]["S"],
+                    "issuer": certificate["M"]["issuer"]["S"],
+                    "date": certificate["M"]["date"]["S"]
+                } for certificate in item["certificates"]["L"]
+            ],
+            "projects": [
+                {
+                    "name": project["M"]["name"]["S"],
+                    "startDate": project["M"]["startDate"]["S"],
+                    "endDate": project["M"]["endDate"]["S"],
+                    "description": project["M"]["description"]["S"],
+                    "highlights": [
+                        highlight["S"] for highlight in project["M"]["highlights"]["L"]
+                    ],
+                    "url": project["M"].get("url", {}).get("S", "")
+                } for project in item["projects"]["L"]
+            ],
+            "skills": [skill["S"] for skill in item["skills"]["L"]]
+        }
         return {
             'statusCode': 200,
-            'body': json.dumps(formatted_data, indent=4)
+            'body': json.dumps(result)
         }
-    except Exception as e:
-        print(e)
+    else:
         return {
-            'statusCode': 500,
-            'body': json.dumps({'error': str(e)}, indent=4)
+            'statusCode': 404,
+            'body': json.dumps({'error': 'Item not found'})
         }
-
-def convert_dynamodb_to_json(dynamodb_item):
-    def convert_value(value):
-        if isinstance(value, dict):
-            for key, val in value.items():
-                if key == 'S':
-                    return val
-                elif key == 'N':
-                    return int(val) if '.' not in val else float(val)
-                elif key == 'M':
-                    return convert_dynamodb_to_json(val)
-                elif key == 'L':
-                    return [convert_value(item) for item in val]
-        return value
-
-    return {k: convert_value(v) for k, v in dynamodb_item.items()}
