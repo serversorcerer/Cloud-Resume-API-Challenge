@@ -1,6 +1,5 @@
 import json
 import boto3
-from botocore.exceptions import ClientError
 
 dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table('ResumeData')
@@ -8,56 +7,29 @@ table = dynamodb.Table('ResumeData')
 def lambda_handler(event, context):
     try:
         response = table.get_item(
-            Key={
-                 'id': '1'
-            }
+            Key={'id': '1'}
         )
-        resume_data = response.get('Item', {})
+        if 'Item' not in response:
+            return {
+                'statusCode': 404,
+                'body': json.dumps({'error': 'Item not found'})
+            }
+
+        resume_data = response['Item']
         
-        # Debugging print statements to understand data structure
-        print("DynamoDB Response:", json.dumps(response, indent=4))
-        print("Resume Data:", json.dumps(resume_data, indent=4))
-        
-        # Reformatting the response
-        formatted_data = {
-            "id": resume_data["id"]["S"],
-            "basics": {
-                "name": resume_data["basics"]["M"]["name"]["S"],
-                "label": resume_data["basics"]["M"]["label"]["S"],
-                "email": resume_data["basics"]["M"]["email"]["S"],
-                "phone": resume_data["basics"]["M"]["phone"]["S"],
-                "summary": resume_data["basics"]["M"]["summary"]["S"],
-                "url": resume_data["basics"]["M"]["url"]["S"],
-                "location": {
-                    "city": resume_data["basics"]["M"]["location"]["M"]["city"]["S"],
-                    "region": resume_data["basics"]["M"]["location"]["M"]["region"]["S"]
-                },
-                "profiles": [
-                    {
-                        "network": profile["M"]["network"]["S"],
-                        "url": profile["M"]["url"]["S"],
-                        "username": profile["M"]["username"]["S"]
-                    } for profile in resume_data["basics"]["M"]["profiles"]["L"]
-                ]
-            },
-            "skills": [skill["S"] for skill in resume_data["skills"]["L"]],
-            "projects": [
-                {
-                    "name": project["M"]["name"]["S"],
-                    "description": project["M"]["description"]["S"],
-                    "highlights": [highlight["S"] for highlight in project["M"]["highlights"]["L"]],
-                    "startDate": project["M"]["startDate"]["S"],
-                    "endDate": project["M"]["endDate"]["S"]
-                } for project in resume_data["projects"]["L"]
-            ],
-            "certificates": [
-                {
-                    "name": certificate["M"]["name"]["S"],
-                    "date": certificate["M"]["date"]["S"],
-                    "issuer": certificate["M"]["issuer"]["S"]
-                } for certificate in resume_data["certificates"]["L"]
-            ]
-        }
+        def convert_ddb_item(item):
+            if isinstance(item, dict):
+                if 'S' in item:
+                    return item['S']
+                elif 'N' in item:
+                    return item['N']
+                elif 'M' in item:
+                    return {k: convert_ddb_item(v) for k, v in item['M'].items()}
+                elif 'L' in item:
+                    return [convert_ddb_item(v) for v in item['L']]
+            return item
+
+        formatted_data = convert_ddb_item(resume_data)
 
         return {
             'statusCode': 200,
