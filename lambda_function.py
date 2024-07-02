@@ -1,10 +1,10 @@
 import json
 import boto3
 from collections import OrderedDict
-from botocore.exceptions import ClientError
+from botocore.exceptions import ClientError, ResourceNotFoundException
 
 dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('resume-api')
+table = dynamodb.Table('ResumeAPI')
 
 def lambda_handler(event, context):
     try:
@@ -19,7 +19,6 @@ def lambda_handler(event, context):
             }
         resume_data = response['Item']
 
-        # Construct the basics section
         basics = OrderedDict([
             ("email", resume_data.get("basics", {}).get("M", {}).get("email", {}).get("S")),
             ("phone", resume_data.get("basics", {}).get("M", {}).get("phone", {}).get("S")),
@@ -39,7 +38,6 @@ def lambda_handler(event, context):
             ])
         ])
 
-        # Construct the certificates section
         certificates = [
             OrderedDict([
                 ("name", cert.get("M", {}).get("name", {}).get("S")),
@@ -48,7 +46,6 @@ def lambda_handler(event, context):
             ]) for cert in resume_data.get("certificates", {}).get("L", [])
         ]
 
-        # Construct the projects section
         projects = [
             OrderedDict([
                 ("name", proj.get("M", {}).get("name", {}).get("S")),
@@ -60,10 +57,8 @@ def lambda_handler(event, context):
             ]) for proj in resume_data.get("projects", {}).get("L", [])
         ]
 
-        # Construct the skills section
         skills = [skill.get("S") for skill in resume_data.get("skills", {}).get("L", [])]
 
-        # Construct the final ordered resume data
         ordered_resume_data = OrderedDict([
             ("id", resume_data.get("id", {}).get("S")),
             ("name", resume_data.get("name", {}).get("M", {}).get("Full Name", {}).get("S")),
@@ -80,8 +75,17 @@ def lambda_handler(event, context):
             },
             'body': json.dumps(ordered_resume_data, indent=4)
         }
+    except ResourceNotFoundException as e:
+        print(f"Resource not found: {e}")
+        return {
+            'statusCode': 404,
+            'headers': {
+                'Content-Type': 'application/json'
+            },
+            'body': json.dumps({'error': 'Requested resource not found'}, indent=4)
+        }
     except ClientError as e:
-        print(e)
+        print(f"Client error: {e}")
         return {
             'statusCode': 500,
             'headers': {
