@@ -29,7 +29,7 @@ def lambda_handler(event, context):
             ("basics", standard_json_data.get("basics")),
             ("certificates", standard_json_data.get("certificates")),
             ("projects", standard_json_data.get("projects")),
-            ("skills", standard_json_data.get("skills"))
+            ("skills", standard_json_data.get("skills")),
         ])
 
         return {
