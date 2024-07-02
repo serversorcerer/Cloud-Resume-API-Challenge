@@ -7,38 +7,16 @@ table = dynamodb.Table('ResumeData')
 
 def lambda_handler(event, context):
     try:
-        response = table.get_item(Key={'id': {'S': '1'}})
+        response = table.get_item(Key={'id': '1'})
         resume_data = response.get('Item', {})
 
-        def convert_dynamodb_json(dynamodb_json):
-            if isinstance(dynamodb_json, dict):
-                if "S" in dynamodb_json:
-                    return dynamodb_json["S"]
-                elif "M" in dynamodb_json:
-                    return {k: convert_dynamodb_json(v) for k, v in dynamodb_json["M"].items()}
-                elif "L" in dynamodb_json:
-                    return [convert_dynamodb_json(v) for v in dynamodb_json["L"]]
-            return dynamodb_json
-
-        standard_json_data = convert_dynamodb_json(resume_data)
-
-        basics_ordered = OrderedDict([
-            ("name", standard_json_data["basics"].get("name")),
-            ("label", standard_json_data["basics"].get("label")),
-            ("summary", standard_json_data["basics"].get("summary")),
-            ("phone", standard_json_data["basics"].get("phone")),
-            ("email", standard_json_data["basics"].get("email")),
-            ("url", standard_json_data["basics"].get("url")),
-            ("location", standard_json_data["basics"].get("location")),
-            ("profiles", standard_json_data["basics"].get("profiles"))
-        ])
-
         ordered_resume_data = OrderedDict([
-            ("id", standard_json_data.get("id")),
-            ("basics", basics_ordered),
-            ("certificates", standard_json_data.get("certificates")),
-            ("projects", standard_json_data.get("projects")),
-            ("skills", standard_json_data.get("skills")),
+            ("id", resume_data.get("id")),
+            ("name", resume_data.get("name")),
+            ("basics", resume_data.get("basics")),
+            ("certificates", resume_data.get("certificates")),
+            ("projects", resume_data.get("projects")),
+            ("skills", resume_data.get("skills")),
         ])
 
         return {

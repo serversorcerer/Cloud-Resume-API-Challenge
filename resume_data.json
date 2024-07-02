@@ -2,25 +2,26 @@
     "id": {
       "S": "1"
     },
+    "name": {
+      "M": {
+        "Full Name": {
+          "S": "Joseph A. Leto"
+        }
+       }
+      },
     "basics": {
       "M": {
-        "name": {
-          "S": "Joseph A. Leto"
-        },
-        "label": {
-          "S": "Cloud Engineer"
-        },
-        "summary": {
-          "S": "Aspiring Solutions Architect with a passion for cloud technologies and a focus on AWS services. Committed to mastering cloud infrastructure and deployment strategies."
+        "email": {
+          "S": "joe@josephaleto.io"
         },
         "phone": {
           "S": "304-886-8223"
         },
-        "email": {
-          "S": "joe@josephaleto.io"
-        },
         "url": {
           "S": "https://josephaleto.io"
+        },
+        "summary": {
+          "S": "Aspiring Solutions Architect with a passion for cloud technologies and a focus on AWS services. Committed to mastering cloud infrastructure and deployment strategies."
         },
         "location": {
           "M": {
