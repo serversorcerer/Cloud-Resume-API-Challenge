@@ -7,7 +7,7 @@ table = dynamodb.Table('ResumeData')
 
 def lambda_handler(event, context):
     try:
-        response = table.get_item(Key={'id': {'S': '1'}})
+        response = table.get_item(Key={'id': '1'})
         resume_data = response.get('Item', {})
 
         basics = OrderedDict([
