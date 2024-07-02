@@ -3,12 +3,13 @@
       "S": "1"
     },
     "name": {
-      "M": {
+      "S": {
         "Full Name": {
           "S": "Joseph A. Leto"
         }
       }
     },
+
     "basics": {
       "M": {
         "email": {
