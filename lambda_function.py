@@ -7,7 +7,7 @@ table = dynamodb.Table('ResumeData')
 
 def lambda_handler(event, context):
     try:
-        response = table.get_item(Key={'id': '1'})
+        response = table.get_item(Key={'id': {'S': '1'}})
         resume_data = response.get('Item', {})
 
         basics = OrderedDict([
@@ -29,13 +29,34 @@ def lambda_handler(event, context):
             ])
         ])
 
+        certificates = [
+            OrderedDict([
+                ("name", cert.get("M", {}).get("name", {}).get("S")),
+                ("date", cert.get("M", {}).get("date", {}).get("S")),
+                ("issuer", cert.get("M", {}).get("issuer", {}).get("S"))
+            ]) for cert in resume_data.get("certificates", {}).get("L", [])
+        ]
+
+        projects = [
+            OrderedDict([
+                ("name", proj.get("M", {}).get("name", {}).get("S")),
+                ("description", proj.get("M", {}).get("description", {}).get("S")),
+                ("highlights", [highlight.get("S") for highlight in proj.get("M", {}).get("highlights", {}).get("L", [])]),
+                ("startDate", proj.get("M", {}).get("startDate", {}).get("S")),
+                ("endDate", proj.get("M", {}).get("endDate", {}).get("S")),
+                ("url", proj.get("M", {}).get("url", {}).get("S"))
+            ]) for proj in resume_data.get("projects", {}).get("L", [])
+        ]
+
+        skills = [skill.get("S") for skill in resume_data.get("skills", {}).get("L", [])]
+
         ordered_resume_data = OrderedDict([
-            ("id", resume_data.get("id")),
-            ("name", resume_data.get("name")),
+            ("id", resume_data.get("id", {}).get("S")),
+            ("name", resume_data.get("name", {}).get("M", {}).get("Full Name", {}).get("S")),
             ("basics", basics),
-            ("certificates", resume_data.get("certificates")),
-            ("projects", resume_data.get("projects")),
-            ("skills", resume_data.get("skills")),
+            ("certificates", certificates),
+            ("projects", projects),
+            ("skills", skills),
         ])
 
         return {
