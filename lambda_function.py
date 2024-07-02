@@ -7,7 +7,8 @@ table = dynamodb.Table('ResumeData')
 
 def lambda_handler(event, context):
     try:
-        response = table.get_item(Key={'id': {'S': '1'}})
+        # Correct the Key attribute to match the DynamoDB table's primary key schema
+        response = table.get_item(Key={'id': '1'})
         resume_data = response.get('Item', {})
 
         def convert_dynamodb_json(dynamodb_json):
