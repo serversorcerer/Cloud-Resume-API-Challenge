@@ -7,10 +7,10 @@ table = dynamodb.Table('ResumeData')
 
 def lambda_handler(event, context):
     try:
-        response = table.get_item(Key={'id': '1'})
+        response = table.get_item(Key={'id': {'S': '1'}})
         resume_data = response.get('Item', {})
 
-        # Convert DynamoDB JSON format to standard JSON format
+        # Function to convert DynamoDB JSON format to standard JSON
         def convert_dynamodb_json(dynamodb_json):
             if isinstance(dynamodb_json, dict):
                 if "S" in dynamodb_json:
@@ -26,7 +26,16 @@ def lambda_handler(event, context):
         # Create ordered JSON
         ordered_resume_data = OrderedDict([
             ("id", standard_json_data.get("id")),
-            ("basics", standard_json_data.get("basics")),
+            ("basics", OrderedDict([
+                ("name", standard_json_data["basics"].get("name")),
+                ("label", standard_json_data["basics"].get("label")),
+                ("email", standard_json_data["basics"].get("email")),
+                ("phone", standard_json_data["basics"].get("phone")),
+                ("url", standard_json_data["basics"].get("url")),
+                ("summary", standard_json_data["basics"].get("summary")),
+                ("location", standard_json_data["basics"].get("location")),
+                ("profiles", standard_json_data["basics"].get("profiles")),
+            ])),
             ("certificates", standard_json_data.get("certificates")),
             ("projects", standard_json_data.get("projects")),
             ("skills", standard_json_data.get("skills")),
