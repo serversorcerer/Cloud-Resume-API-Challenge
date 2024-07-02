@@ -18,7 +18,8 @@ def convert_dynamodb_json(dynamodb_json):
 
 def lambda_handler(event, context):
     try:
-        response = table.get_item(Key={'id': {'S': '1'}})
+        # Correct the key format for the get_item operation
+        response = table.get_item(Key={'id': '1'})
         resume_data = response.get('Item', {})
 
         if not resume_data:
@@ -83,8 +84,17 @@ def lambda_handler(event, context):
             },
             'body': json.dumps(ordered_resume_data, indent=4)
         }
+    except ClientError as e:
+        print(f"Client error: {e}")
+        return {
+            'statusCode': 500,
+            'headers': {
+                'Content-Type': 'application/json'
+            },
+            'body': json.dumps({'error': str(e)}, indent=4)
+        }
     except Exception as e:
-        print(e)
+        print(f"Exception: {e}")
         return {
             'statusCode': 500,
             'headers': {

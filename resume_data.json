@@ -201,13 +201,4 @@
         {
           "S": "API Gateway"
         },
-        {
-          "S": "CloudFormation"
-        },
-        {
-          "S": "DynamoDB"
-        }
-      ]
-    }
-  }
   
