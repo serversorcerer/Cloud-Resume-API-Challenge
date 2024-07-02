@@ -2,15 +2,14 @@
     "id": {
       "S": "1"
     },
-    "name": {
-      "M": {
-        "Full Name": {
-          "S": "Joseph A. Leto"
-        }
-       }
-    },
     "basics": {
       "M": {
+        "name": {
+          "S": "Joseph A. Leto"
+        },
+        "label": {
+          "S": "Cloud Engineer"
+        },
         "email": {
           "S": "joe@josephaleto.io"
         },
