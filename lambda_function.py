@@ -1,15 +1,25 @@
 import json
 import boto3
 from collections import OrderedDict
+from botocore.exceptions import ClientError
 
 dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('ResumeData')
+table = dynamodb.Table('resume-api')
 
 def lambda_handler(event, context):
     try:
         response = table.get_item(Key={'id': '1'})
-        resume_data = response.get('Item', {})
+        if 'Item' not in response:
+            return {
+                'statusCode': 404,
+                'headers': {
+                    'Content-Type': 'application/json'
+                },
+                'body': json.dumps({'error': 'Item not found'})
+            }
+        resume_data = response['Item']
 
+        # Construct the basics section
         basics = OrderedDict([
             ("email", resume_data.get("basics", {}).get("M", {}).get("email", {}).get("S")),
             ("phone", resume_data.get("basics", {}).get("M", {}).get("phone", {}).get("S")),
@@ -29,6 +39,7 @@ def lambda_handler(event, context):
             ])
         ])
 
+        # Construct the certificates section
         certificates = [
             OrderedDict([
                 ("name", cert.get("M", {}).get("name", {}).get("S")),
@@ -37,6 +48,7 @@ def lambda_handler(event, context):
             ]) for cert in resume_data.get("certificates", {}).get("L", [])
         ]
 
+        # Construct the projects section
         projects = [
             OrderedDict([
                 ("name", proj.get("M", {}).get("name", {}).get("S")),
@@ -48,8 +60,10 @@ def lambda_handler(event, context):
             ]) for proj in resume_data.get("projects", {}).get("L", [])
         ]
 
+        # Construct the skills section
         skills = [skill.get("S") for skill in resume_data.get("skills", {}).get("L", [])]
 
+        # Construct the final ordered resume data
         ordered_resume_data = OrderedDict([
             ("id", resume_data.get("id", {}).get("S")),
             ("name", resume_data.get("name", {}).get("M", {}).get("Full Name", {}).get("S")),
@@ -61,11 +75,26 @@ def lambda_handler(event, context):
 
         return {
             'statusCode': 200,
+            'headers': {
+                'Content-Type': 'application/json'
+            },
             'body': json.dumps(ordered_resume_data, indent=4)
+        }
+    except ClientError as e:
+        print(e)
+        return {
+            'statusCode': 500,
+            'headers': {
+                'Content-Type': 'application/json'
+            },
+            'body': json.dumps({'error': str(e)}, indent=4)
         }
     except Exception as e:
         print(e)
         return {
             'statusCode': 500,
+            'headers': {
+                'Content-Type': 'application/json'
+            },
             'body': json.dumps({'error': str(e)}, indent=4)
         }
