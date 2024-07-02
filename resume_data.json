@@ -1,217 +1,212 @@
 {
     "id": {
-      "S": "1"
-    },
-    "name": {
-      "M": {
-        "Name": {
-          "S": "Joseph A. Leto"
-        },
-        "title": {
-          "S": "Cloud Engineer"
-        }
-      }
+        "S": "1"
     },
     "basics": {
-      "M": {
-        "email": {
-          "S": "joe@josephaleto.io"
-        },
-        "phone": {
-          "S": "304-886-8223"
-        },
-        "url": {
-          "S": "https://josephaleto.io"
-        },
-        "summary": {
-          "S": "Aspiring Solutions Architect with a passion for cloud technologies and a focus on AWS services. Committed to mastering cloud infrastructure and deployment strategies."
-        },
-        "location": {
-          "M": {
-            "city": {
-              "S": "Ashburn"
-            },
-            "region": {
-              "S": "Virginia"
-            },
-            "countryCode": {
-              "S": "US"
-            }
-          }
-        },
-        "profiles": {
-          "L": [
-            {
-              "M": {
-                "network": {
-                  "S": "Website"
-                },
-                "username": {
-                  "S": "josephaleto.io"
-                },
-                "url": {
-                  "S": "https://josephaleto.io"
-                }
-              }
-            },
-            {
-              "M": {
-                "network": {
-                  "S": "LinkedIn"
-                },
-                "username": {
-                  "S": "joseph-leto"
-                },
-                "url": {
-                  "S": "https://linkedin.com/in/joseph-leto"
-                }
-              }
-            },
-            {
-              "M": {
-                "network": {
-                  "S": "GitHub"
-                },
-                "username": {
-                  "S": "serversorcerer"
-                },
-                "url": {
-                  "S": "https://github.com/serversorcerer"
-                }
-              }
-            }
-          ]
-        }
-      }
-    },
-    "certificates": {
-      "L": [
-        {
-          "M": {
+        "M": {
             "name": {
-              "S": "AWS Certified Cloud Practitioner"
+                "S": "Joseph A. Leto"
             },
-            "date": {
-              "S": "2023"
+            "label": {
+                "S": "Cloud Engineer"
             },
-            "issuer": {
-              "S": "Amazon Web Services"
-            }
-          }
-        },
-        {
-          "M": {
-            "name": {
-              "S": "AWS Certified Solutions Architect – Associate"
+            "summary": {
+                "S": "Aspiring Solutions Architect with a passion for cloud technologies and a focus on AWS services. Committed to mastering cloud infrastructure and deployment strategies."
             },
-            "date": {
-              "S": "In Progress"
+            "phone": {
+                "S": "304-886-8223"
             },
-            "issuer": {
-              "S": "Amazon Web Services"
-            }
-          }
-        }
-      ]
-    },
-    "projects": {
-      "L": [
-        {
-          "M": {
-            "name": {
-              "S": "Serverless API for Resume Data"
-            },
-            "description": {
-              "S": "Developed a serverless API using AWS Lambda and API Gateway to fetch resume data stored in DynamoDB."
-            },
-            "highlights": {
-              "L": [
-                {
-                  "S": "Implemented robust security measures using IAM roles and policies."
-                },
-                {
-                  "S": "Automated deployment with GitHub Actions, ensuring continuous integration and delivery."
-                },
-                {
-                  "S": "Designed API endpoints for efficient data retrieval and presentation."
-                }
-              ]
-            },
-            "startDate": {
-              "S": "2024-06-01"
-            },
-            "endDate": {
-              "S": "Present"
-            }
-          }
-        },
-        {
-          "M": {
-            "name": {
-              "S": "Cloud Resume Challenge"
-            },
-            "description": {
-              "S": "Architected a serverless web application using AWS and Terraform."
-            },
-            "highlights": {
-              "L": [
-                {
-                  "S": "Initiated an AWS S3-hosted website with CloudFront, elevating user engagement by 40%."
-                },
-                {
-                  "S": "Integrated a Python-scripted AWS Lambda visitor counter, enriching user interaction and website dynamism."
-                },
-                {
-                  "S": "Deployed CI/CD pipelines via GitHub Actions, accelerating update efficiency and cutting deployment time by 60%."
-                },
-                {
-                  "S": "Managed infrastructure with Terraform, halving setup time and solidifying deployment consistency."
-                }
-              ]
+            "email": {
+                "S": "joe@josephaleto.io"
             },
             "url": {
-              "S": "https://josephaleto.io"
+                "S": "https://josephaleto.io"
             },
-            "startDate": {
-              "S": "2023-11-01"
+            "location": {
+                "M": {
+                    "city": {
+                        "S": "Ashburn"
+                    },
+                    "region": {
+                        "S": "Virginia"
+                    },
+                    "countryCode": {
+                        "S": "US"
+                    }
+                }
             },
-            "endDate": {
-              "S": "Present"
+            "profiles": {
+                "L": [
+                    {
+                        "M": {
+                            "network": {
+                                "S": "Website"
+                            },
+                            "username": {
+                                "S": "josephaleto.io"
+                            },
+                            "url": {
+                                "S": "https://josephaleto.io"
+                            }
+                        }
+                    },
+                    {
+                        "M": {
+                            "network": {
+                                "S": "LinkedIn"
+                            },
+                            "username": {
+                                "S": "joseph-leto"
+                            },
+                            "url": {
+                                "S": "https://linkedin.com/in/joseph-leto"
+                            }
+                        }
+                    },
+                    {
+                        "M": {
+                            "network": {
+                                "S": "GitHub"
+                            },
+                            "username": {
+                                "S": "serversorcerer"
+                            },
+                            "url": {
+                                "S": "https://github.com/serversorcerer"
+                            }
+                        }
+                    }
+                ]
             }
-          }
         }
-      ]
+    },
+    "certificates": {
+        "L": [
+            {
+                "M": {
+                    "name": {
+                        "S": "AWS Certified Cloud Practitioner"
+                    },
+                    "date": {
+                        "S": "2023"
+                    },
+                    "issuer": {
+                        "S": "Amazon Web Services"
+                    }
+                }
+            },
+            {
+                "M": {
+                    "name": {
+                        "S": "AWS Certified Solutions Architect – Associate"
+                    },
+                    "date": {
+                        "S": "In Progress"
+                    },
+                    "issuer": {
+                        "S": "Amazon Web Services"
+                    }
+                }
+            }
+        ]
+    },
+    "projects": {
+        "L": [
+            {
+                "M": {
+                    "name": {
+                        "S": "Serverless API for Resume Data"
+                    },
+                    "description": {
+                        "S": "Developed a serverless API using AWS Lambda and API Gateway to fetch resume data stored in DynamoDB."
+                    },
+                    "highlights": {
+                        "L": [
+                            {
+                                "S": "Implemented robust security measures using IAM roles and policies."
+                            },
+                            {
+                                "S": "Automated deployment with GitHub Actions, ensuring continuous integration and delivery."
+                            },
+                            {
+                                "S": "Designed API endpoints for efficient data retrieval and presentation."
+                            }
+                        ]
+                    },
+                    "startDate": {
+                        "S": "2024-06-01"
+                    },
+                    "endDate": {
+                        "S": "Present"
+                    }
+                }
+            },
+            {
+                "M": {
+                    "name": {
+                        "S": "Cloud Resume Challenge"
+                    },
+                    "description": {
+                        "S": "Architected a serverless web application using AWS and Terraform."
+                    },
+                    "highlights": {
+                        "L": [
+                            {
+                                "S": "Initiated an AWS S3-hosted website with CloudFront, elevating user engagement by 40%."
+                            },
+                            {
+                                "S": "Integrated a Python-scripted AWS Lambda visitor counter, enriching user interaction and website dynamism."
+                            },
+                            {
+                                "S": "Deployed CI/CD pipelines via GitHub Actions, accelerating update efficiency and cutting deployment time by 60%."
+                            },
+                            {
+                                "S": "Managed infrastructure with Terraform, halving setup time and solidifying deployment consistency."
+                            }
+                        ]
+                    },
+                    "url": {
+                        "S": "https://josephaleto.io"
+                    },
+                    "startDate": {
+                        "S": "2023-11-01"
+                    },
+                    "endDate": {
+                        "S": "Present"
+                    }
+                }
+            }
+        ]
     },
     "skills": {
-      "L": [
-        {
-          "S": "AWS"
-        },
-        {
-          "S": "CI/CD"
-        },
-        {
-          "S": "Terraform"
-        },
-        {
-          "S": "Python"
-        },
-        {
-          "S": "DevOps Automation"
-        },
-        {
-          "S": "Lambda"
-        },
-        {
-          "S": "API Gateway"
-        },
-        {
-          "S": "CloudFormation"
-        },
-        {
-          "S": "DynamoDB"
-        }
-      ]
+        "L": [
+            {
+                "S": "AWS"
+            },
+            {
+                "S": "CI/CD"
+            },
+            {
+                "S": "Terraform"
+            },
+            {
+                "S": "Python"
+            },
+            {
+                "S": "DevOps Automation"
+            },
+            {
+                "S": "Lambda"
+            },
+            {
+                "S": "API Gateway"
+            },
+            {
+                "S": "CloudFormation"
+            },
+            {
+                "S": "DynamoDB"
+            }
+        ]
     }
-  }
-  
+}
