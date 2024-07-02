@@ -40,19 +40,6 @@
             {
               "M": {
                 "network": {
-                  "S": "LinkedIn"
-                },
-                "username": {
-                  "S": "joseph-leto"
-                },
-                "url": {
-                  "S": "https://linkedin.com/in/joseph-leto"
-                }
-              }
-            },
-            {
-              "M": {
-                "network": {
                   "S": "Website"
                 },
                 "username": {
@@ -60,6 +47,19 @@
                 },
                 "url": {
                   "S": "https://josephaleto.io"
+                }
+              }
+            },
+            {
+              "M": {
+                "network": {
+                  "S": "LinkedIn"
+                },
+                "username": {
+                  "S": "joseph-leto"
+                },
+                "url": {
+                  "S": "https://linkedin.com/in/joseph-leto"
                 }
               }
             },
@@ -164,6 +164,9 @@
                   "S": "Managed infrastructure with Terraform, halving setup time and solidifying deployment consistency."
                 }
               ]
+            },
+            "url": {
+              "S": "https://josephaleto.io"
             },
             "startDate": {
               "S": "2023-11-01"
