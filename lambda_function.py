@@ -15,7 +15,7 @@ def safe_get(d, keys, default=None):
 
 def lambda_handler(event, context):
     try:
-        response = table.get_item(Key={'id': {'S': '1'}})
+        response = table.get_item(Key={'id': '1'})
         resume_data = response.get('Item', {})
 
         if not resume_data:
@@ -29,7 +29,7 @@ def lambda_handler(event, context):
             }
 
         ordered_resume_data = OrderedDict([
-            ("id", resume_data.get("id", {}).get("S", "")),
+            ("id", resume_data.get("id", "")),
             ("name", OrderedDict([
                 ("Full Name", safe_get(resume_data, ["name", "M", "Full Name", "S"], ""))
             ])),
