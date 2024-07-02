@@ -6,13 +6,6 @@ from botocore.exceptions import ClientError
 dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table('ResumeData')
 
-def safe_get(d, keys, default=None):
-    for key in keys:
-        d = d.get(key, {})
-        if not isinstance(d, dict):
-            return default
-    return d
-
 def lambda_handler(event, context):
     try:
         response = table.get_item(Key={'id': '1'})
@@ -29,46 +22,46 @@ def lambda_handler(event, context):
             }
 
         ordered_resume_data = OrderedDict([
-            ("id", resume_data.get("id", "")),
+            ("id", resume_data.get("id", {}).get("S", "")),
             ("name", OrderedDict([
-                ("Full Name", safe_get(resume_data, ["name", "M", "Full Name", "S"], ""))
+                ("Full Name", resume_data.get("basics", {}).get("M", {}).get("name", {}).get("S", ""))
             ])),
             ("basics", OrderedDict([
-                ("summary", safe_get(resume_data, ["basics", "M", "summary", "S"], "")),
-                ("phone", safe_get(resume_data, ["basics", "M", "phone", "S"], "")),
-                ("email", safe_get(resume_data, ["basics", "M", "email", "S"], "")),
-                ("url", safe_get(resume_data, ["basics", "M", "url", "S"], "")),
+                ("summary", resume_data.get("basics", {}).get("M", {}).get("summary", {}).get("S", "")),
+                ("phone", resume_data.get("basics", {}).get("M", {}).get("phone", {}).get("S", "")),
+                ("email", resume_data.get("basics", {}).get("M", {}).get("email", {}).get("S", "")),
+                ("url", resume_data.get("basics", {}).get("M", {}).get("url", {}).get("S", "")),
                 ("location", OrderedDict([
-                    ("region", safe_get(resume_data, ["basics", "M", "location", "M", "region", "S"], "")),
-                    ("city", safe_get(resume_data, ["basics", "M", "location", "M", "city", "S"], "")),
-                    ("countryCode", safe_get(resume_data, ["basics", "M", "location", "M", "countryCode", "S"], ""))
+                    ("region", resume_data.get("basics", {}).get("M", {}).get("location", {}).get("M", {}).get("region", {}).get("S", "")),
+                    ("city", resume_data.get("basics", {}).get("M", {}).get("location", {}).get("M", {}).get("city", {}).get("S", "")),
+                    ("countryCode", resume_data.get("basics", {}).get("M", {}).get("location", {}).get("M", {}).get("countryCode", {}).get("S", ""))
                 ])),
                 ("profiles", [
                     OrderedDict([
-                        ("network", safe_get(profile, ["M", "network", "S"], "")),
-                        ("username", safe_get(profile, ["M", "username", "S"], "")),
-                        ("url", safe_get(profile, ["M", "url", "S"], ""))
-                    ]) for profile in safe_get(resume_data, ["basics", "M", "profiles", "L"], [])
+                        ("network", profile.get("M", {}).get("network", {}).get("S", "")),
+                        ("username", profile.get("M", {}).get("username", {}).get("S", "")),
+                        ("url", profile.get("M", {}).get("url", {}).get("S", ""))
+                    ]) for profile in resume_data.get("basics", {}).get("M", {}).get("profiles", {}).get("L", [])
                 ])
             ])),
             ("certificates", [
                 OrderedDict([
-                    ("name", safe_get(cert, ["M", "name", "S"], "")),
-                    ("date", safe_get(cert, ["M", "date", "S"], "")),
-                    ("issuer", safe_get(cert, ["M", "issuer", "S"], ""))
-                ]) for cert in safe_get(resume_data, ["certificates", "L"], [])
+                    ("name", cert.get("M", {}).get("name", {}).get("S", "")),
+                    ("date", cert.get("M", {}).get("date", {}).get("S", "")),
+                    ("issuer", cert.get("M", {}).get("issuer", {}).get("S", ""))
+                ]) for cert in resume_data.get("certificates", {}).get("L", [])
             ]),
             ("projects", [
                 OrderedDict([
-                    ("name", safe_get(proj, ["M", "name", "S"], "")),
-                    ("description", safe_get(proj, ["M", "description", "S"], "")),
-                    ("highlights", [safe_get(highlight, ["S"], "") for highlight in safe_get(proj, ["M", "highlights", "L"], [])]),
-                    ("startDate", safe_get(proj, ["M", "startDate", "S"], "")),
-                    ("endDate", safe_get(proj, ["M", "endDate", "S"], "")),
-                    ("url", safe_get(proj, ["M", "url", "S"], ""))
-                ]) for proj in safe_get(resume_data, ["projects", "L"], [])
+                    ("name", proj.get("M", {}).get("name", {}).get("S", "")),
+                    ("description", proj.get("M", {}).get("description", {}).get("S", "")),
+                    ("highlights", [highlight.get("S", "") for highlight in proj.get("M", {}).get("highlights", {}).get("L", [])]),
+                    ("startDate", proj.get("M", {}).get("startDate", {}).get("S", "")),
+                    ("endDate", proj.get("M", {}).get("endDate", {}).get("S", "")),
+                    ("url", proj.get("M", {}).get("url", {}).get("S", ""))
+                ]) for proj in resume_data.get("projects", {}).get("L", [])
             ]),
-            ("skills", [safe_get(skill, ["S"], "") for skill in safe_get(resume_data, ["skills", "L"], [])])
+            ("skills", [skill.get("S", "") for skill in resume_data.get("skills", {}).get("L", [])])
         ])
 
         return {
