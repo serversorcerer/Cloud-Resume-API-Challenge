@@ -12,6 +12,7 @@ def lambda_handler(event, context):
 
         ordered_resume_data = OrderedDict([
             ("id", resume_data.get("id")),
+            ("name", resume_data.get("name")),
             ("basics", resume_data.get("basics")),
             ("certificates", resume_data.get("certificates")),
             ("projects", resume_data.get("projects")),
