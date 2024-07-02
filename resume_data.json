@@ -4,36 +4,30 @@
     },
     "basics": {
       "M": {
-        "name": {
-          "S": "Joseph A. Leto"
-        },
-        "label": {
-          "S": "Cloud Engineer"
-        },
         "email": {
           "S": "joe@josephaleto.io"
         },
-        "phone": {
-          "S": "304-886-8223"
-        },
-        "url": {
-          "S": "https://josephaleto.io"
-        },
-        "summary": {
-          "S": "Aspiring Solutions Architect with a passion for cloud technologies and a focus on AWS services. Committed to mastering cloud infrastructure and deployment strategies."
+        "label": {
+          "S": "Cloud Engineer"
         },
         "location": {
           "M": {
             "city": {
               "S": "Ashburn"
             },
-            "region": {
-              "S": "Virginia"
-            },
             "countryCode": {
               "S": "US"
+            },
+            "region": {
+              "S": "Virginia"
             }
           }
+        },
+        "name": {
+          "S": "Joseph A. Leto"
+        },
+        "phone": {
+          "S": "304-886-8223"
         },
         "profiles": {
           "L": [
@@ -42,11 +36,11 @@
                 "network": {
                   "S": "Website"
                 },
-                "username": {
-                  "S": "josephaleto.io"
-                },
                 "url": {
                   "S": "https://josephaleto.io"
+                },
+                "username": {
+                  "S": "josephaleto.io"
                 }
               }
             },
@@ -55,11 +49,11 @@
                 "network": {
                   "S": "LinkedIn"
                 },
-                "username": {
-                  "S": "joseph-leto"
-                },
                 "url": {
                   "S": "https://linkedin.com/in/joseph-leto"
+                },
+                "username": {
+                  "S": "joseph-leto"
                 }
               }
             },
@@ -68,15 +62,21 @@
                 "network": {
                   "S": "GitHub"
                 },
-                "username": {
-                  "S": "serversorcerer"
-                },
                 "url": {
                   "S": "https://github.com/serversorcerer"
+                },
+                "username": {
+                  "S": "serversorcerer"
                 }
               }
             }
           ]
+        },
+        "summary": {
+          "S": "Aspiring Solutions Architect with a passion for cloud technologies and a focus on AWS services. Committed to mastering cloud infrastructure and deployment strategies."
+        },
+        "url": {
+          "S": "https://josephaleto.io"
         }
       }
     },
@@ -84,27 +84,27 @@
       "L": [
         {
           "M": {
-            "name": {
-              "S": "AWS Certified Cloud Practitioner"
-            },
             "date": {
               "S": "2023"
             },
             "issuer": {
               "S": "Amazon Web Services"
+            },
+            "name": {
+              "S": "AWS Certified Cloud Practitioner"
             }
           }
         },
         {
           "M": {
-            "name": {
-              "S": "AWS Certified Solutions Architect – Associate"
-            },
             "date": {
               "S": "In Progress"
             },
             "issuer": {
               "S": "Amazon Web Services"
+            },
+            "name": {
+              "S": "AWS Certified Solutions Architect â€“ Associate"
             }
           }
         }
@@ -114,11 +114,11 @@
       "L": [
         {
           "M": {
-            "name": {
-              "S": "Serverless API for Resume Data"
-            },
             "description": {
               "S": "Developed a serverless API using AWS Lambda and API Gateway to fetch resume data stored in DynamoDB."
+            },
+            "endDate": {
+              "S": "Present"
             },
             "highlights": {
               "L": [
@@ -133,21 +133,21 @@
                 }
               ]
             },
+            "name": {
+              "S": "Serverless API for Resume Data"
+            },
             "startDate": {
               "S": "2024-06-01"
-            },
-            "endDate": {
-              "S": "Present"
             }
           }
         },
         {
           "M": {
-            "name": {
-              "S": "Cloud Resume Challenge"
-            },
             "description": {
               "S": "Architected a serverless web application using AWS and Terraform."
+            },
+            "endDate": {
+              "S": "Present"
             },
             "highlights": {
               "L": [
@@ -165,14 +165,14 @@
                 }
               ]
             },
-            "url": {
-              "S": "https://josephaleto.io"
+            "name": {
+              "S": "Cloud Resume Challenge"
             },
             "startDate": {
               "S": "2023-11-01"
             },
-            "endDate": {
-              "S": "Present"
+            "url": {
+              "S": "https://josephaleto.io"
             }
           }
         }
@@ -201,4 +201,12 @@
         {
           "S": "API Gateway"
         },
-  
+        {
+          "S": "CloudFormation"
+        },
+        {
+          "S": "DynamoDB"
+        }
+      ]
+    }
+  }
