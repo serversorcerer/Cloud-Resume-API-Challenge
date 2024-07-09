@@ -1,0 +1,17 @@
+# Terraform state files
+*.tfstate
+*.tfstate.backup
+.terraform/
+
+# Local environment variables
+*.env
+
+# Logs
+*.log
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Node modules
+node_modules/

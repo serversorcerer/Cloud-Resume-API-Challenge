@@ -30,7 +30,20 @@ jobs:
           aws-region: us-east-1
 
       - name: Package Lambda function
-        run: zip -r function.zip lambda_function.py
+        run: |
+          cd lambda_function
+          zip -r ../lambda_function.zip .
 
       - name: Deploy to AWS Lambda
-        run: aws lambda update-function-code --function-name FetchResumeData --zip-file fileb://function.zip
+        run: aws lambda update-function-code --function-name FetchResumeData --zip-file fileb://lambda_function.zip
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.0.0
+
+      - name: Initialize Terraform
+        run: terraform init
+
+      - name: Apply Terraform configuration
+        run: terraform apply -auto-approve
