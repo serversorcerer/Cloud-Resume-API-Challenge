@@ -1,17 +1,14 @@
 # Cloud Resume API Challenge
 
-Welcome to the Cloud Resume API Challenge repository! This project showcases my journey and learning experiences with AWS services through the creation of a serverless API to serve my resume data.
-
-## Project Overview
-
-### **AWS Cloud Resume API Challenge**
+Welcome to the Cloud Resume API Challenge repository! This project highlights my journey with AWS services, culminating in the development of a serverless API that serves my resume data dynamically.
 
 ## Quick Demo
 
 Test the API directly using this curl command:
 
-   ```bash
-   curl https://5yw6uexaub.execute-api.us-east-1.amazonaws.com/Prod/resume 
+```bash
+curl -X GET https://your-api-gateway-url.execute-api.region.amazonaws.com/prod/resume
+
 
 This project represents a detailed exploration into various AWS services and how they can be utilized to host and manage a serverless API for serving resume data. Below is a summary of the key components and accomplishments of this challenge:
 
