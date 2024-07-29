@@ -13,19 +13,19 @@ curl -X GET https://your-api-gateway-url.execute-api.region.amazonaws.com/prod/r
 
 This project represents a detailed exploration into various AWS services and how they can be utilized to host and manage a serverless API for serving resume data. Below is a summary of the key components and accomplishments of this challenge:
 
-## Key Features
+### Key Features
 
 - **Developed a Serverless API**
   - Designed and deployed a RESTful API using AWS Lambda and API Gateway.
   - The API retrieves resume data stored in DynamoDB and returns it in JSON format.
 
 - **Deployed Using AWS Services**
-  - Utilized [AWS Lambda](https://aws.amazon.com/lambda/) for running serverless functions.
-  - Stored resume data in [DynamoDB](https://aws.amazon.com/dynamodb/), ensuring fast retrieval and high availability.
-  - Configured [API Gateway](https://aws.amazon.com/api-gateway/) for secure API access.
+  - Utilized AWS Lambda for running serverless functions.
+  - Stored resume data in DynamoDB, ensuring fast retrieval and high availability.
+  - Configured API Gateway for secure API access.
 
 - **Automated Deployment with Terraform**
-  - Managed AWS resources using [Terraform](https://www.terraform.io/), ensuring Infrastructure as Code practices.
+  - Managed AWS resources using Terraform, ensuring Infrastructure as Code practices.
   - Automated resource creation, including Lambda functions, DynamoDB tables, and API Gateway setup.
 
 - **Real-Time Data Handling**
@@ -33,7 +33,7 @@ This project represents a detailed exploration into various AWS services and how
   - Implemented efficient querying and data retrieval from DynamoDB.
 
 - **CI/CD Pipeline with GitHub Actions**
-  - Set up [GitHub Actions](https://github.com/features/actions) for continuous integration and continuous deployment.
+  - Set up GitHub Actions for continuous integration and continuous deployment.
   - Automated updates to the Lambda function and DynamoDB table on code changes.
 
 - **Comprehensive Documentation**
@@ -46,10 +46,10 @@ This project represents a detailed exploration into various AWS services and how
 
 To replicate this project, you'll need the following:
 
-- An [AWS account](https://aws.amazon.com/)
+- An AWS account
 - Familiarity with AWS services such as Lambda, API Gateway, and DynamoDB
-- [Terraform](https://www.terraform.io/) installed for infrastructure management
-- [GitHub](https://github.com/) account for version control and CI/CD
+- Terraform installed for infrastructure management
+- GitHub account for version control and CI/CD
 
 ### Installation and Setup
 
@@ -57,16 +57,17 @@ To replicate this project, you'll need the following:
 
 - Ensure Terraform is installed on your machine.
 - Navigate to the `infrastructure` directory and execute:
-  ```bash
-  terraform init
-  terraform apply
 
-#### Deploy the API
+```bash
+terraform init
+terraform apply
+
+### Deploy the API
 
 - Upload your Lambda function code.
 - Configure the API Gateway to expose your Lambda function.
 
-#### Set Up CI/CD with GitHub Actions
+### Set Up CI/CD with GitHub Actions
 
 - Configure GitHub Actions workflows in the `.github/workflows` directory to automate deployments.
 
@@ -84,4 +85,5 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 
 ### Contact
 
-For any questions or inquiries, please reach out to me at joe@josephaleto.io.
+For any questions or inquiries, please reach out to me at [joe@josephaleto.io](mailto:joe@josephaleto.io).
+
