@@ -9,6 +9,7 @@ Test the API directly using this curl command:
 ```bash
 curl -X GET https://your-api-gateway-url.execute-api.region.amazonaws.com/prod/resume
 
+## Project Overview
 
 This project represents a detailed exploration into various AWS services and how they can be utilized to host and manage a serverless API for serving resume data. Below is a summary of the key components and accomplishments of this challenge:
 
