@@ -61,6 +61,7 @@ AWS-CLOUD-RESUME-API/
 ├── lambda_function/
 │   ├── lambda_function.py
 │   └── resume_data.json
+├── diagram.png
 ├── .gitignore
 ├── LICENSE
 ├── README.md
@@ -124,10 +125,6 @@ AWS-CLOUD-RESUME-API/
 
 - **Using Curl**: Test the API to ensure it returns resume data in JSON format.
 - **Verify CI/CD**: Push changes to GitHub and ensure the GitHub Actions workflow deploys updates correctly.
-
-## Medium Blog
-
-- For a detailed step by step guide to build this project , follow the steps in this [blog]
 
 ## Contact
 
