@@ -1,5 +1,7 @@
 # AWS Cloud Resume API Challenge
 
+![AWS Cloud Resume API Challenge Architecture](https://raw.githubusercontent.com/serversorcerer/Cloud-Resume-API-Challenge/main/diagram.png)
+
 Welcome to the repository for my Cloud Resume API Challenge! This project highlights my journey through various AWS services, culminating in the creation of a dynamic, serverless API that serves my resume data. Let's dive into the details of how this was accomplished.
 
 ## Quick Demo
@@ -59,6 +61,7 @@ AWS-CLOUD-RESUME-API/
 ├── lambda_function/
 │   ├── lambda_function.py
 │   └── resume_data.json
+├── diagram.png
 ├── .gitignore
 ├── LICENSE
 ├── README.md
@@ -122,10 +125,6 @@ AWS-CLOUD-RESUME-API/
 
 - **Using Curl**: Test the API to ensure it returns resume data in JSON format.
 - **Verify CI/CD**: Push changes to GitHub and ensure the GitHub Actions workflow deploys updates correctly.
-
-## Medium Blog
-
-- For a detailed step by step guide to build this project , follow the steps in this [blog]
 
 ## Contact
 
