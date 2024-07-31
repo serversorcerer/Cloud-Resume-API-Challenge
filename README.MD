@@ -18,6 +18,8 @@ If you have jq installed, use this for a prettified JSON response:
 curl -X GET https://5yw6uexaub.execute-api.us-east-1.amazonaws.com/Prod/resume | jq .
 ```
 
+![DEMO](https://raw.githubusercontent.com/serversorcerer/Cloud-Resume-API-Challenge/main/Images/CURL%20RESPONSE.png)
+
 ## Overview
 
 This project demonstrates the automated deployment of an AWS Lambda function using Terraform and GitHub Actions. The Lambda function acts as the backend for a resume API, providing endpoints to fetch resume details stored in a DynamoDB table.
