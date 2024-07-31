@@ -1,4 +1,4 @@
-# Cloud Resume API Challenge
+# AWS Cloud Resume API Challenge
 
 Welcome to the Cloud Resume API Challenge repository! This project highlights my journey with AWS services, culminating in the development of a serverless API that serves my resume data dynamically.
 
@@ -6,86 +6,127 @@ Welcome to the Cloud Resume API Challenge repository! This project highlights my
 
 Test the API directly using this curl command:
 
-```bash
-curl -X GET https://your-api-gateway-url.execute-api.region.amazonaws.com/prod/resume
+```sh
+curl https://5yw6uexaub.execute-api.us-east-1.amazonaws.com/Prod/resume
+```
 
+Use this link if you have jq installed
+
+'''sh
+curl -X GET https://5yw6uexaub.execute-api.us-east-1.amazonaws.com/Prod/resume | jq .
 '''
 
-## Project Overview
 
-This project represents a detailed exploration into various AWS services and how they can be utilized to host and manage a serverless API for serving resume data. Below is a summary of the key components and accomplishments of this challenge:
 
-### Key Features
+## Overview
 
-- **Developed a Serverless API**
-  - Designed and deployed a RESTful API using AWS Lambda and API Gateway.
-  - The API retrieves resume data stored in DynamoDB and returns it in JSON format.
+This project automates the deployment of an AWS Lambda function using Terraform and GitHub Actions. The Lambda function serves as the backend for a resume API, providing endpoints to fetch resume details stored in a DynamoDB table.
 
-- **Deployed Using AWS Services**
-  - Utilized AWS Lambda for running serverless functions.
-  - Stored resume data in DynamoDB, ensuring fast retrieval and high availability.
-  - Configured API Gateway for secure API access.
+## Architecture
 
-- **Automated Deployment with Terraform**
-  - Managed AWS resources using Terraform, ensuring Infrastructure as Code practices.
-  - Automated resource creation, including Lambda functions, DynamoDB tables, and API Gateway setup.
+The architecture involves:
 
-- **Real-Time Data Handling**
-  - Integrated real-time capabilities for fetching the most up-to-date resume data.
-  - Implemented efficient querying and data retrieval from DynamoDB.
+- **AWS Lambda**: Runs the backend code for the API.
+- **AWS API Gateway**: Provides a RESTful API endpoint.
+- **DynamoDB**: Stores the json resume data.
+- **Terraform**: Manages the infrastructure as code.
+- **GitHub Actions**: Automates the CI/CD pipeline.
 
-- **CI/CD Pipeline with GitHub Actions**
-  - Set up GitHub Actions for continuous integration and continuous deployment.
-  - Automated updates to the Lambda function and DynamoDB table on code changes.
+## Prerequisites
 
-- **Comprehensive Documentation**
-  - Documented the entire API setup and deployment process.
-  - Provided insights and methodologies to help others replicate and understand the serverless architecture.
+Before you begin, ensure you have met the following requirements:
 
-## Getting Started
+- An AWS account with necessary permissions.
+- [Terraform](https://www.terraform.io/downloads.html) installed.
+- AWS CLI configured with your credentials.
+- A GitHub account with access to the repository.
 
-### Prerequisites
+## Structure of the Project
 
-To replicate this project, you'll need the following:
+```plaintext
+AWS-CLOUD-RESUME-API/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml
+├── infra/
+│   ├── .terraform/
+│   ├── main.tf
+│   ├── provider.tf
+│   ├── api_gateway.tf
+│   ├── lambda_function.zip
+│   ├── requirements.txt
+│   └── terraform.tfstate
+├── lambda_function/
+│   ├── lambda_function.py
+│   └── resume_data.json
+├── .gitignore
+├── LICENSE
+├── README.md
+```
 
-- An AWS account
-- Familiarity with AWS services such as Lambda, API Gateway, and DynamoDB
-- Terraform installed for infrastructure management
-- GitHub account for version control and CI/CD
+### Project setup steps 🚀
 
-### Installation and Setup
+#### 1. Set Up AWS
 
-#### Deploy Infrastructure with Terraform
+- **Sign Up for AWS**: If you don't already have an AWS account, sign up at [aws.amazon.com](https://aws.amazon.com/).
+- **Set Up Credentials**: Configure your AWS CLI with your credentials using `aws configure`.
 
-- Ensure Terraform is installed on your machine.
-- Navigate to the `infrastructure` directory and execute:
+#### 2. Create a JSON Resume
 
-```bash
-terraform init
-terraform apply
+- Create a JSON file containing your resume data. Follow a schema [Here](https://jsonresume.org/schema)
+- Store this JSON file for later use.
 
-### Deploy the API
+#### 3. Create DynamoDB Table
 
-- Upload your Lambda function code.
-- Configure the API Gateway to expose your Lambda function.
+- **Table Name**: Resumes
+- **Primary Key**: `id` (String)
+- Populate the table with your resume data using the AWS Management Console, AWS CLI, or a script.
 
-### Set Up CI/CD with GitHub Actions
+#### 4. Write the Lambda Function
 
-- Configure GitHub Actions workflows in the `.github/workflows` directory to automate deployments.
+- Create a Python script (`lambda_function.py`) to fetch resume data from DynamoDB and return it in JSON format.
 
-### Usage
+#### 5. Package the Lambda Function
 
-Access your API via the API Gateway URL to retrieve your resume in JSON format. Updates to your Lambda function or data will automatically trigger deployments through GitHub Actions.
+- Zip the `lambda_function.py` file.
 
-### Contributing
+#### 6. Create Terraform Configuration
 
-Contributions are welcome! Feel free to fork the repository, make changes, and submit pull requests. Please ensure your contributions adhere to the project's coding standards and best practices.
+- Create `main.tf` and `provider.tf` for infrastructure as code as a way to automatically create the lambda function and the API Gateway configurations .
 
-### License
+#### 7. Create an S3 bucket to store terraform state files
 
-This project is licensed under the MIT License. See the LICENSE file for more details.
+- Create an S3 bucket in the AWS console or the AWS CLI with the same name as the one used in `provider.tf` file .
 
-### Contact
+#### 7. Apply Terraform Configuration
 
-For any questions or inquiries, please reach out to me at [joe@josephaleto.io](mailto:joe@josephaleto.io).
+- **Initialize Terraform**:
+  ```sh
+  terraform init
+  ```
+- **Plan the Deployment**:
+  ```sh
+  terraform plan
+  ```
+- **Apply Deployment**:
+  ```sh
+  terraform apply
+  ```
+- After the deployement an api endpoint url is going to be generated , keep it for the test after .
 
+#### 8. Set Up GitHub Actions
+
+- Create a GitHub Actions workflow (`.github/workflows/deploy.yml`) to automatically deploy updates to your Lambda function on every push to the repository.
+
+#### 9. Test the API
+
+- **API Gateway URL**: Test your endpoint to ensure it returns the resume data in JSON format (the one generated after executing the terraform setup) using `curl`.
+- **GitHub Actions**: Make a change to your code, push to the repository, and verify that the GitHub Actions workflow deploys the updated Lambda function.
+
+## Medium Blog
+
+- For a detailed step by step guide to build this project , follow the steps in this [blog]
+
+## Contact
+
+For any questions or inquiries, please reach out to me at joe@josephaleto.io.
