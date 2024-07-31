@@ -1,26 +1,26 @@
 # AWS Cloud Resume API Challenge
 
-Welcome to the Cloud Resume API Challenge repository! This project highlights my journey with AWS services, culminating in the development of a serverless API that serves my resume data dynamically.
+Welcome to the repository for my Cloud Resume API Challenge! This project highlights my journey through various AWS services, culminating in the creation of a dynamic, serverless API that serves my resume data. Let's dive into the details of how this was accomplished.
 
 ## Quick Demo
 
-Test the API directly using this curl command:
+Experience the API in action with this curl command:
 
 ```sh
 curl https://5yw6uexaub.execute-api.us-east-1.amazonaws.com/Prod/resume
 ```
 
-Use this link if you have jq installed
+If you have jq installed, use this for a prettified JSON response:
 
-'''sh
+```sh
 curl -X GET https://5yw6uexaub.execute-api.us-east-1.amazonaws.com/Prod/resume | jq .
-'''
+```
 
 
 
 ## Overview
 
-This project automates the deployment of an AWS Lambda function using Terraform and GitHub Actions. The Lambda function serves as the backend for a resume API, providing endpoints to fetch resume details stored in a DynamoDB table.
+This project demonstrates the automated deployment of an AWS Lambda function using Terraform and GitHub Actions. The Lambda function acts as the backend for a resume API, providing endpoints to fetch resume details stored in a DynamoDB table.
 
 ## Architecture
 
@@ -34,7 +34,7 @@ The architecture involves:
 
 ## Prerequisites
 
-Before you begin, ensure you have met the following requirements:
+Before getting started, ensure you have the following:
 
 - An AWS account with necessary permissions.
 - [Terraform](https://www.terraform.io/downloads.html) installed.
@@ -64,12 +64,12 @@ AWS-CLOUD-RESUME-API/
 ├── README.md
 ```
 
-### Project setup steps 🚀
+### Setup Guide 🚀
 
 #### 1. Set Up AWS
 
-- **Sign Up for AWS**: If you don't already have an AWS account, sign up at [aws.amazon.com](https://aws.amazon.com/).
-- **Set Up Credentials**: Configure your AWS CLI with your credentials using `aws configure`.
+- **Sign Up**: Create an AWS account if you don't have one, sign up at [aws.amazon.com](https://aws.amazon.com/).
+- **Configure AWS CLI**: Configure your AWS CLI with your credentials using `aws configure`.
 
 #### 2. Create a JSON Resume
 
@@ -82,7 +82,7 @@ AWS-CLOUD-RESUME-API/
 - **Primary Key**: `id` (String)
 - Populate the table with your resume data using the AWS Management Console, AWS CLI, or a script.
 
-#### 4. Write the Lambda Function
+#### 4. Develop the Lambda Function
 
 - Create a Python script (`lambda_function.py`) to fetch resume data from DynamoDB and return it in JSON format.
 
@@ -90,15 +90,15 @@ AWS-CLOUD-RESUME-API/
 
 - Zip the `lambda_function.py` file.
 
-#### 6. Create Terraform Configuration
+#### 6. Define Infrastructure with Terraform
 
 - Create `main.tf` and `provider.tf` for infrastructure as code as a way to automatically create the lambda function and the API Gateway configurations .
 
-#### 7. Create an S3 bucket to store terraform state files
+#### 7. Store Terraform State Files
 
 - Create an S3 bucket in the AWS console or the AWS CLI with the same name as the one used in `provider.tf` file .
 
-#### 7. Apply Terraform Configuration
+#### 8. Deploy with Terraform
 
 - **Initialize Terraform**:
   ```sh
@@ -112,16 +112,16 @@ AWS-CLOUD-RESUME-API/
   ```sh
   terraform apply
   ```
-- After the deployement an api endpoint url is going to be generated , keep it for the test after .
+- **API Endpoint**: Note the generated API endpoint URL for testing.
 
-#### 8. Set Up GitHub Actions
+#### 9. Automate Github Actions
 
-- Create a GitHub Actions workflow (`.github/workflows/deploy.yml`) to automatically deploy updates to your Lambda function on every push to the repository.
+- **Workflow**: Set up a workflow file in .github/workflows/deploy.yml to automate deployments on code pushes.
 
-#### 9. Test the API
+#### 10. Test the API
 
-- **API Gateway URL**: Test your endpoint to ensure it returns the resume data in JSON format (the one generated after executing the terraform setup) using `curl`.
-- **GitHub Actions**: Make a change to your code, push to the repository, and verify that the GitHub Actions workflow deploys the updated Lambda function.
+- **Using Curl**: Test the API to ensure it returns resume data in JSON format.
+- **Verify CI/CD**: Push changes to GitHub and ensure the GitHub Actions workflow deploys updates correctly.
 
 ## Medium Blog
 
