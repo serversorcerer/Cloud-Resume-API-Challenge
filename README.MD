@@ -18,7 +18,7 @@ If you have jq installed, use this for a prettified JSON response:
 curl -X GET https://5yw6uexaub.execute-api.us-east-1.amazonaws.com/Prod/resume | jq .
 ```
 
-(https://github.com/serversorcerer/Cloud-Resume-API-Challenge/blob/main/CURL%20RESPONSE.png?raw=true)
+!(https://github.com/serversorcerer/Cloud-Resume-API-Challenge/blob/main/CURL%20RESPONSE.png?raw=true)
 
 
 ## Overview
