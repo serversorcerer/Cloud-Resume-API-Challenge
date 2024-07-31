@@ -1,5 +1,7 @@
 # AWS Cloud Resume API Challenge
 
+![AWS Cloud Resume API Challenge Architecture](https://raw.githubusercontent.com/serversorcerer/Cloud-Resume-API-Challenge/main/diagram.png)
+
 Welcome to the repository for my Cloud Resume API Challenge! This project highlights my journey through various AWS services, culminating in the creation of a dynamic, serverless API that serves my resume data. Let's dive into the details of how this was accomplished.
 
 ## Quick Demo
